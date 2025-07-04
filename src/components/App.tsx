@@ -1,137 +1,151 @@
-// TypeScript Intermediate Type Declaration Exercises
-// Add appropriate type annotations to the following
+// TypeScript Basic Type Declaration Exercises
+// Remove the 'any' types and replace them with proper type declarations
 
-// Exercise 1: Declare a variable that can be null or undefined along with a string
-const username: string | undefined | null = null;
+// Exercise 1: Basic variable types
+// Declare the correct types for these variables
+let userName: string = "Alice";
+let userAge: number = 25;
+let isActive: boolean = true;
+let score: number = 89.5;
 
-// Exercise 2: Declare an array that can contain both strings and numbers
-const mixedData: (string | number)[] = ["hello", 42, "world", 15];
+// Exercise 2: Array types
+// Declare the correct types for these arrays
+let colors: string[] = ["red", "green", "blue"];
+let numbers: number[] = [1, 2, 3, 4, 5];
+let flags: boolean[] = [true, false, true];
 
-// Exercise 3: Declare a function that can return either a string or null
-function findUser(id: number): string | null {
-  if (id > 0) {
-    return "User found";
-  }
-  return null;
+// Exercise 3: Function parameter and return types
+// Add proper type annotations to parameters and return types
+function greetUser(name: string, age: number): string {
+    return `Hello ${name}, you are ${age} years old`;
 }
 
-// Exercise 4: Declare a tuple for storing a coordinate pair (x, y)
-const coordinate = [10, 20];
-
-// Exercise 5: Declare an enum for different user roles
-enum UserRole {
-  ADMIN: "admin",
-  USER: "user",
-  GUEST: "guest",
-};
-
-// Exercise 6: Declare a function that takes an optional parameter
-function createMessage(text: string, urgent?: boolean) {
-  return urgent ? `URGENT: ${text}` : text;
+function calculateArea(width: number, height: number): number {
+    return width * height;
 }
 
-// Exercise 7: Declare a type for a user object with optional email
-const user: { name: string; age: number; email?: string } = {
-  name: "John",
-  age: 30,
-  email: "john@example.com",
-};
-
-// Exercise 8: Declare a function that takes a callback function as parameter
-function processData(data, callback) {
-  const result = data.map((x) => x * 2);
-  callback(result);
+function isEven(num: number): boolean {
+    return num % 2 === 0;
 }
 
-// Exercise 9: Declare a generic function that works with any array type
-function getLastItem(arr<any>) {
-  return arr[arr.length - 1];
+// Exercise 4: Object type declaration
+// Declare the correct type for this object
+let user: {id: number; name: string; email: string; isVerified: boolean} = {
+    id: 1,
+    name: "John",
+    email: "john@example.com",
+    isVerified: true
+};
+
+// Exercise 5: Union types
+// Some variables can have multiple types - use union types
+let id: number | string = 123;        // Can be number or string
+let response: string | number = "OK"; // Can be string or number
+
+function processId(userId: string | number): string { // userId can be string or number
+    return `Processing user: ${userId}`;
 }
 
-// Exercise 10: Declare a discriminated union type for different shapes
-const circle = {
-  type: "circle",
-  radius: 5,
+// Exercise 6: Optional properties
+// Create a type for a product where some properties are optional
+let product: {name: string; price: number; description?: string; inStock?: boolean} = {
+    name: "Laptop",
+    price: 999,
+    // description is optional
+    // inStock is optional
 };
 
-const rectangle = {
-  type: "rectangle",
-  width: 10,
-  height: 8,
+// Exercise 7: Function types
+// Declare the type for these function variables
+let mathOperation: (a: number, b: number) => number = (a: number, b: number) => a + b;
+let stringFormatter: (text: string) => string = (text: string) => text.toUpperCase();
+
+// Exercise 8: Tuple types
+// These arrays have fixed length and specific types at each position
+let coordinates: any = [40.7128, -74.0060]; // [latitude, longitude]
+let nameAndAge: any = ["Bob", 30];          // [name, age]
+
+// Exercise 9: Enum-like values
+// Declare types for variables that can only have specific string values
+let status: any = "pending";     // Can be "pending", "approved", or "rejected"
+let theme: any = "dark";         // Can be "light" or "dark"
+
+// Exercise 10: Complex nested object
+// Declare the type for this nested object structure
+let company: {name: string; employees: {name: string; role: string; salary: number}[]; founded: number; isPublic: boolean} = {
+    name: "Tech Corp",
+    employees: [
+        { name: "Alice", role: "Developer", salary: 75000 },
+        { name: "Bob", role: "Designer", salary: 65000 }
+    ],
+    founded: 2020,
+    isPublic: false
 };
 
-// SOLUTIONS (uncomment to see the answers):
+// SOLUTIONS (uncomment to check your answers):
 
 /*
-// Exercise 1: Declare a variable that can be null or undefined along with a string
-let username: string | null | undefined = null;
+// Exercise 1:
+let userName: string = "Alice";
+let userAge: number = 25;
+let isActive: boolean = true;
+let score: number = 89.5;
 
-// Exercise 2: Declare an array that can contain both strings and numbers
-let mixedData: (string | number)[] = ["hello", 42, "world", 15];
+// Exercise 2:
+let colors: string[] = ["red", "green", "blue"];
+let numbers: number[] = [1, 2, 3, 4, 5];
+let flags: boolean[] = [true, false, true];
 
-// Exercise 3: Declare a function that can return either a string or null
-function findUser(id: number): string | null {
-    if (id > 0) {
-        return "User found";
-    }
-    return null;
+// Exercise 3:
+function greetUser(name: string, age: number): string {
+    return `Hello ${name}, you are ${age} years old`;
 }
 
-// Exercise 4: Declare a tuple for storing a coordinate pair (x, y)
-let coordinate: [number, number] = [10, 20];
-
-// Exercise 5: Declare an enum for different user roles
-enum UserRole {
-    ADMIN = "admin",
-    USER = "user",
-    GUEST = "guest"
+function calculateArea(width: number, height: number): number {
+    return width * height;
 }
 
-// Exercise 6: Declare a function that takes an optional parameter
-function createMessage(text: string, urgent?: boolean): string {
-    return urgent ? `URGENT: ${text}` : text;
+function isEven(num: number): boolean {
+    return num % 2 === 0;
 }
 
-// Exercise 7: Declare a type for a user object with optional email
-let user: { name: string; age: number; email?: string } = {
+// Exercise 4:
+let user: { id: number; name: string; email: string; isVerified: boolean } = {
+    id: 1,
     name: "John",
-    age: 30,
-    email: "john@example.com"
+    email: "john@example.com",
+    isVerified: true
 };
 
-// Exercise 8: Declare a function that takes a callback function as parameter
-function processData(data: number[], callback: (result: number[]) => void): void {
-    const result = data.map(x => x * 2);
-    callback(result);
+// Exercise 5:
+let id: number | string = 123;
+let response: string | number = "OK";
+
+function processId(userId: string | number): string {
+    return `Processing user: ${userId}`;
 }
 
-// Exercise 9: Declare a generic function that works with any array type
-function getLastItem<T>(arr: T[]): T | undefined {
-    return arr[arr.length - 1];
-}
-
-// Exercise 10: Declare a discriminated union type for different shapes
-type Circle = {
-    type: "circle";
-    radius: number;
+// Exercise 6:
+let product: { name: string; price: number; description?: string; inStock?: boolean } = {
+    name: "Laptop",
+    price: 999,
 };
 
-type Rectangle = {
-    type: "rectangle";
-    width: number;
-    height: number;
-};
+// Exercise 7:
+let mathOperation: (a: number, b: number) => number = (a: number, b: number) => a + b;
+let stringFormatter: (text: string) => string = (text: string) => text.toUpperCase();
 
-type Shape = Circle | Rectangle;
+// Exercise 8:
+let coordinates: [number, number] = [40.7128, -74.0060];
+let nameAndAge: [string, number] = ["Bob", 30];
 
-let circle: Circle = {
-    type: "circle",
-    radius: 5
-};
+// Exercise 9:
+let status: "pending" | "approved" | "rejected" = "pending";
+let theme: "light" | "dark" = "dark";
 
-let rectangle: Rectangle = {
-    type: "rectangle",
-    width: 10,
-    height: 8
-};
-*/
+// Exercise 10:
+let company: {
+    name: string;
+    employees: { name: string; role: string; salary: number }[];
+    founded: number;
+    isPublic:
