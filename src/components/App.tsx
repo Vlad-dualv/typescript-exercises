@@ -1,55 +1,55 @@
-let userAge: number;
-let userName: string;
-let userActive: boolean;
-let userBalance = number;
+// TypeScript Basic Type Declaration Exercises
+// Complete each exercise by adding the correct type annotations
 
-let colors: string[];
-let scores: number[];
-let taskStatuses: boolean[];
+// Exercise 1: Declare a variable for a person's name
+// TODO: Add type annotation
+const personName: string = "Alice";
 
-let book: {
-  title: string;
-  author: string;
-  pages: number;
-  isAvailabel: boolean;
+// Exercise 2: Declare a variable for someone's age
+// TODO: Add type annotation
+const age: number = 25;
+
+// Exercise 3: Declare a variable that indicates if a task is completed
+// TODO: Add type annotation
+const isCompleted: boolean = true;
+
+// Exercise 4: Declare a variable that can hold either a string or number
+// TODO: Add type annotation
+const identifier: string | number = "ABC123";
+
+// Exercise 5: Declare an array of numbers for test scores
+// TODO: Add type annotation
+const testScores: number[] = [85, 92, 78, 96];
+
+// Exercise 6: Declare an array of strings for city names
+// TODO: Add type annotation
+const cities: string[] = ["New York", "London", "Tokyo"];
+
+// Exercise 7: Declare an object type for a book with title and author
+// TODO: Add type annotation
+const book: { title: string; author: string } = {
+  title: "1984",
+  author: "George Orwell",
 };
 
-function sum(a: number, b: number): number {
+// Exercise 8: Declare an object type for a user with name, email, and optional age
+// TODO: Add type annotation (age should be optional)
+const user: { name: string; email: string; age?: number } = {
+  name: "John Doe",
+  email: "john@example.com",
+};
+
+// Exercise 9: Declare a function that takes two numbers and returns their sum
+// TODO: Add type annotations for parameters and return type
+function addNumbers(a: number, b: number): number {
   return a + b;
 }
 
-function strLenght(str: string): number {
-  return str.length;
+// Exercise 10: Declare a function that takes a string and returns nothing (void)
+// TODO: Add type annotations for parameter and return type
+function logMessage(message: string): void {
+  console.log(message);
 }
 
-function booleanConsole(boolean: boolean): void {
-  console.log(boolean);
-}
-
-let stringOrNumber: string | number;
-let nullOrString: string | null;
-let size: "small" | "medium" | "large";
-
-let userProfile: { name: string; email: string; age?: number; bio?: string };
-
-let coordinates: [number, number];
-let userInfo: [string, number];
-let colorRGB = [number, number, number];
-
-let loadingState = "loading";
-let magicNumber = 42;
-type status = "success" | "error";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-  inStock: boolean;
-}
-
-let product: Product;
-
-function greeting(user: { name: string; age: number; email: string }): string {
-  return `Hello, ${user.name}`;
-}
+// BONUS: Try to compile this file with TypeScript compiler (tsc)
+// to see if your type annotations are correct!
