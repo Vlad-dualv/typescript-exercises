@@ -1,66 +1,47 @@
 interface Person {
   name: string;
   age: number;
-  email: string;
+  email?: string;
 }
-/*---------------------*/
+
 function greetPerson(person: Person): string {
-  return `Hello, ${person.name}, you are ${person.age} years old and your email is "${person.email}"`;
+  return `Hello, ${person.name}!`;
 }
 
 /*---------------------*/
-interface Book {
-  readonly title: string;
-  author: string;
-  pages: number;
-  isbn?: string;
-  publishYear?: number;
-}
 
-/*---------------------*/
-function createBookSummary(book: Book): string {
-  return `Title: ${book.title}, Author: ${book.author}`;
-}
+type Status = "pending" | "approved" | "rejected" | "cancelled";
 
-/*---------------------*/
-type Status = "pending" | "approved" | "rejected";
-type Priority = "low" | "medium" | "high";
-
-interface Task {
+interface Application {
   id: number;
-  title: string;
+  applicantName: string;
   status: Status;
-  priority: Priority;
-  dueDate?: Date;
-}
-
-function filterTask(tasks: Task[], status: Status): Task[] {
-  return tasks.filter((task) => task.status === status);
+  sumbittedAt: Date;
 }
 
 /*---------------------*/
-interface Vehicle {
-  brand: string;
-  model: string;
-  year: number;
+
+interface Calculator {
+  add(a: number, b: number): number;
+  subtract(a: number, b: number): number;
+  multiply(a: number, b: number): number;
+  divide(a: number, b: number): number;
 }
 
-interface Car extends Vehicle {
-  doors: number;
-  fuelType: "gasoline" | "electric" | "hybrid";
-}
+class BasicCalculator implements Calculator {
+  add(a: number, b: number): number {
+    return a + b;
+  }
 
-interface Motorcycle extends Vehicle {
-  engineSize: number;
-  hasWindshield: boolean;
-}
+  subtract(a: number, b: number): number {
+    return a - b;
+  }
 
-function calculateCarInsurance(car: Car): number {
-  let baseCost = 500;
-  let doorFactor = car.doors * 50;
-  let fuelFactor =
-    car.fuelType === "electric" ? -100 : car.fuelType === "hybrid" ? -50 : 0;
-  return baseCost + doorFactor + fuelFactor;
-}
+  multiply(a: number, b: number): number {
+    return a * b;
+  }
 
-function calculateCarInsurance(moto: Motorcycle): number {}
+  divide(a: number, b: number): number {
+    return a / b;
+  }
+}
