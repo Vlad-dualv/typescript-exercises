@@ -1,370 +1,312 @@
 # TypeScript Return Types - 10 Exercises
 
-## Exercise 1: Basic Return Type Annotations
+## Exercise 1: Basic Return Type Annotation
 **Difficulty: Beginner**
 
-Complete the following functions by adding explicit return type annotations:
+Write a function `calculateArea` that takes two parameters (`width` and `height`, both numbers) and returns their product. Explicitly annotate the return type.
 
 
-// Add return type annotations to these functions
-
-function add(a: number, b: number): number {
-    return a + b;
+function calculateArea(width: number, height: number): number {
+  return width * height;
 }
 
-function greet(name: string):string {
-    return `Hello, ${name}!`;
+console.log(calculateArea(5, 3)); // Should output: 15
+
+Create a function `formatValue` that accepts a boolean parameter `asString`. If `asString` is true, return the string "42", otherwise return the number 42. Use a union type for the return type.
+
+
+function formatValue(asString: boolean): string | number {
+  return asString ? "42" : 42
 }
+```
 
-function isEven(num: number): boolean {
-    return num % 2 === 0;
-}
-
-
-## Exercise 2: Void vs Undefined Return Types
-**Difficulty: Beginner**
-
-Explain the difference and provide examples for `void` and `undefined` return types:
-
-
-// Fix these function signatures
-function logMessage(message: string): void {
-    console.log(message);
-}
-
-function processData(data: string[]): undefined {
-    data.forEach(item => console.log(item));
-    return undefined;
-}
-
-function validateInput(input: string): void {
-    if (!input) {
-        return;
-    }
-    console.log("Valid input");
-}
-
-
-**Question:** When should you use `void` vs `undefined`?
-
----
-
-## Exercise 3: Union Return Types
-**Difficulty: Intermediate**
-
-Create functions that return union types:
-
-// Complete this function that returns either a number or an error message
-function divide(a: number, b: number): number | string {
-    if (b === 0) {
-        return "Cannot divide by zero";
-    }
-    return a / b;
-}
-
-// Create a function that returns either a User object or null
-interface User {
-    id: number;
-    name: string;
-}
-
-function findUser(id: number): User | null {
-    // Simulate database lookup
-    const users: User[] = [
-        { id: 1, name: "Alice" },
-        { id: 2, name: "Bob" }
-    ];
-    
-    // Your implementation here
-}
+**Expected behavior:**
+```typescript
+console.log(formatValue(true));  // Should output: "42"
+console.log(formatValue(false)); // Should output: 42
 ```
 
 ---
 
-## Exercise 4: Generic Return Types
-**Difficulty: Intermediate**
+## Exercise 3: Object Return Type
+**Difficulty: Beginner-Intermediate**
 
-Implement generic functions with proper return type annotations:
-
-
-// Create a generic function that returns the first element of an array
-function getFirst<T>(arr: T[]): ??? {
-    return arr[0];
-}
-
-// Create a generic function that wraps a value in a Result type
-interface Result<T> {
-    success: boolean;
-    data: T | null;
-    error: string | null;
-}
-
-function createResult<T>(value: T): ??? {
-    return {
-        success: true,
-        data: value,
-        error: null
-    };
-}
-
-// Test your implementations
-const numbers = [1, 2, 3, 4, 5];
-const firstNumber = getFirst(numbers); // Should be number | undefined
-const result = createResult("Hello"); // Should be Result<string>
-```
-
----
-
-## Exercise 5: Function Return Type Inference
-**Difficulty: Intermediate**
-
-Analyze and predict the inferred return types:
+Write a function `createUser` that takes a name (string) and age (number) as parameters and returns an object with these properties plus an `isActive` property set to true. Define the return type explicitly.
 
 ```typescript
-// What will TypeScript infer as the return type for each function?
-function mystery1() {
-    if (Math.random() > 0.5) {
-        return "success";
-    }
-    return 42;
+// Your code here
+function createUser(name: string, age: number): {name: string; age: number; isActive : boolean} {
+  return {name, age, isActive: true}
 }
 
-function mystery2() {
-    const values = [1, 2, 3];
-    return values.map(x => x * 2);
-}
 
-function mystery3() {
-    return {
-        name: "John",
-        age: 30,
-        isActive: true
-    };
-}
+const user = createUser("Alice", 25);
+console.log(user); // Should output: { name: "Alice", age: 25, isActive: true }
 
-// Write the explicit return types for each function
-function mystery1(): ??? { /* ... */ }
-function mystery2(): ??? { /* ... */ }
-function mystery3(): ??? { /* ... */ }
+
+Create a function `getEvenNumbers` that takes an array of numbers and returns only the even numbers. Specify the return type as an array of numbers.
+
+
+function getEvenNumbers(numbers: number[]): number[] {
+  return numbers.filter((number) => number % 2 === 0)
+}
+```
+
+**Expected behavior:**
+```typescript
+console.log(getEvenNumbers([1, 2, 3, 4, 5, 6])); // Should output: [2, 4, 6]
 ```
 
 ---
 
-## Exercise 6: Conditional Return Types
+## Exercise 5: Generic Return Type
+**Difficulty: Intermediate**
+
+Write a generic function `getFirstItem` that takes an array of any type and returns the first item or `undefined` if the array is empty. Use generics for the return type.
+
+```typescript
+// Your code here
+function getFirstItem</* Add generic parameter */>(items: /* Add parameter type */): /* Add return type */ {
+  // Implementation here
+}
+```
+
+**Expected behavior:**
+```typescript
+console.log(getFirstItem([1, 2, 3]));        // Should output: 1
+console.log(getFirstItem(["a", "b", "c"]));  // Should output: "a"
+console.log(getFirstItem([]));               // Should output: undefined
+```
+
+---
+
+## Exercise 6: Promise Return Type
+**Difficulty: Intermediate**
+
+Create an async function `fetchUserData` that simulates fetching user data. It should return a Promise that resolves to an object with `id` (number), `name` (string), and `email` (string) properties.
+
+```typescript
+// Your code here
+async function fetchUserData(userId: number): /* Add Promise return type */ {
+  // Simulate API call with setTimeout
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        id: userId,
+        name: "John Doe",
+        email: "john@example.com"
+      });
+    }, 1000);
+  });
+}
+```
+
+**Expected behavior:**
+```typescript
+fetchUserData(1).then(user => console.log(user));
+// Should output: { id: 1, name: "John Doe", email: "john@example.com" }
+```
+
+---
+
+## Exercise 7: Conditional Return Type
+**Difficulty: Intermediate-Advanced**
+
+Create a function `processData` that uses a generic type parameter with a conditional return type. If the input is a string, return its length (number). If the input is a number, return its string representation.
+
+```typescript
+// Your code here
+function processData<T extends string | number>(
+  data: T
+): /* Add conditional return type */ {
+  // Implementation here
+}
+```
+
+**Expected behavior:**
+```typescript
+console.log(processData("hello"));  // Should output: 5
+console.log(processData(42));       // Should output: "42"
+```
+
+---
+
+## Exercise 8: Function Return Type with Type Guards
 **Difficulty: Advanced**
 
-Create functions using conditional types for return values:
+Write a function `parseValue` that takes a string and tries to parse it as a number. If successful, return an object `{ success: true, value: number }`. If failed, return `{ success: false, error: string }`. Use a discriminated union for the return type.
 
 ```typescript
-// Create a function that returns different types based on a boolean parameter
-function getValue<T extends boolean>(
-    returnString: T
-): T extends true ? string : number {
-    if (returnString) {
-        return "Hello" as any;
-    }
-    return 42 as any;
+// Your code here
+function parseValue(input: string): /* Add discriminated union return type */ {
+  // Implementation here
 }
+```
 
-// Fix the implementation to make it type-safe
-// The function should return string when returnString is true, number when false
-
-// Test cases:
-const str = getValue(true);   // Should be string
-const num = getValue(false);  // Should be number
+**Expected behavior:**
+```typescript
+console.log(parseValue("42"));    // Should output: { success: true, value: 42 }
+console.log(parseValue("hello")); // Should output: { success: false, error: "Invalid number" }
 ```
 
 ---
 
-## Exercise 7: Promise Return Types
-**Difficulty: Intermediate**
-
-Work with async functions and Promise return types:
-
-```typescript
-// Add proper return type annotations to these async functions
-async function fetchUserData(id: number) {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 100));
-    return {
-        id,
-        name: "User " + id,
-        email: `user${id}@example.com`
-    };
-}
-
-async function processFile(filename: string) {
-    try {
-        // Simulate file processing
-        await new Promise(resolve => setTimeout(resolve, 200));
-        return { success: true, message: "File processed" };
-    } catch (error) {
-        return { success: false, error: error.message };
-    }
-}
-
-// What are the return types of these functions?
-// fetchUserData return type: ???
-// processFile return type: ???
-```
-
----
-
-## Exercise 8: Mapped Types and Return Types
+## Exercise 9: Mapped Return Type
 **Difficulty: Advanced**
 
-Create utility functions using mapped types:
+Create a function `transformObject` that takes an object and a transformer function, then returns a new object with the same keys but transformed values. Use mapped types for the return type.
 
 ```typescript
-interface User {
-    id: number;
-    name: string;
-    email: string;
-    age: number;
+// Your code here
+function transformObject<T, U>(
+  obj: T,
+  transformer: (value: T[keyof T]) => U
+): /* Add mapped return type */ {
+  // Implementation here
 }
+```
 
-// Create a function that returns a partial update object
-function createUserUpdate<K extends keyof User>(
-    field: K,
-    value: User[K]
-): ??? {
-    return { [field]: value } as Pick<User, K>;
-}
-
-// Create a function that returns all fields as optional
-function makeOptional<T>(obj: T): ??? {
-    return { ...obj };
-}
-
-// Test your implementations
-const nameUpdate = createUserUpdate("name", "Alice");
-const optionalUser = makeOptional({ id: 1, name: "Bob" });
+**Expected behavior:**
+```typescript
+const original = { a: 1, b: 2, c: 3 };
+const doubled = transformObject(original, x => x * 2);
+console.log(doubled); // Should output: { a: 2, b: 4, c: 6 }
 ```
 
 ---
 
-## Exercise 9: Recursive Return Types
+## Exercise 10: ReturnType Utility with Function Overloads
 **Difficulty: Advanced**
 
-Implement functions with recursive return types:
+Create a function `getValue` with multiple overloads that returns different types based on the input parameter type. Then create a type alias that extracts the return type of one of the overloads.
 
 ```typescript
-// Define a nested object type
-interface NestedObject {
-    value: number;
-    children?: NestedObject[];
+// Your code here
+function getValue(key: "name"): string;
+function getValue(key: "age"): number;
+function getValue(key: "isActive"): boolean;
+function getValue(key: string): /* Add return type */ {
+  // Implementation here
 }
 
-// Create a function that flattens nested objects
-function flattenObject(obj: NestedObject): ??? {
-    let result = [obj.value];
-    
-    if (obj.children) {
-        for (const child of obj.children) {
-            result.push(...flattenObject(child));
-        }
-    }
-    
-    return result;
-}
+// Create a type alias for the return type when key is "name"
+type NameReturnType = /* Use ReturnType utility */;
+```
 
-// Create a function that deeply converts all number properties to strings
-function stringifyNumbers<T>(obj: T): ??? {
-    if (typeof obj === 'number') {
-        return String(obj);
-    }
-    if (typeof obj === 'object' && obj !== null) {
-        const result: any = {};
-        for (const key in obj) {
-            result[key] = stringifyNumbers(obj[key]);
-        }
-        return result;
-    }
-    return obj;
-}
+**Expected behavior:**
+```typescript
+console.log(getValue("name"));     // Should output: string
+console.log(getValue("age"));      // Should output: number
+console.log(getValue("isActive")); // Should output: boolean
 ```
 
 ---
 
-## Exercise 10: Advanced Return Type Patterns
-**Difficulty: Expert**
+## Answer Key
 
-Combine multiple advanced concepts:
+<details>
+<summary>Click to reveal answers</summary>
 
+### Exercise 1 Answer:
 ```typescript
-// Create a builder pattern with method chaining
-class QueryBuilder {
-    private query: string = "";
-    
-    select(fields: string[]): ??? {
-        this.query += `SELECT ${fields.join(", ")} `;
-        return this;
-    }
-    
-    from(table: string): ??? {
-        this.query += `FROM ${table} `;
-        return this;
-    }
-    
-    where(condition: string): ??? {
-        this.query += `WHERE ${condition} `;
-        return this;
-    }
-    
-    build(): ??? {
-        return this.query.trim();
-    }
+function calculateArea(width: number, height: number): number {
+  return width * height;
 }
-
-// Create a function that returns different types based on input
-function apiCall<T extends 'user' | 'post' | 'comment'>(
-    endpoint: T
-): Promise<
-    T extends 'user' ? UserResponse :
-    T extends 'post' ? PostResponse :
-    T extends 'comment' ? CommentResponse :
-    never
-> {
-    // Implementation would go here
-    return null as any;
-}
-
-interface UserResponse { id: number; name: string; }
-interface PostResponse { id: number; title: string; content: string; }
-interface CommentResponse { id: number; text: string; postId: number; }
-
-// Test the implementations
-const builder = new QueryBuilder();
-const query = builder
-    .select(['name', 'email'])
-    .from('users')
-    .where('age > 18')
-    .build();
-
-const userPromise = apiCall('user');     // Should be Promise<UserResponse>
-const postPromise = apiCall('post');     // Should be Promise<PostResponse>
 ```
 
----
+### Exercise 2 Answer:
+```typescript
+function formatValue(asString: boolean): string | number {
+  return asString ? "42" : 42;
+}
+```
 
-## Answer Key Summary
+### Exercise 3 Answer:
+```typescript
+function createUser(name: string, age: number): { name: string; age: number; isActive: boolean } {
+  return { name, age, isActive: true };
+}
+```
 
-**Exercise 1:** `number`, `string`, `boolean`
+### Exercise 4 Answer:
+```typescript
+function getEvenNumbers(numbers: number[]): number[] {
+  return numbers.filter(num => num % 2 === 0);
+}
+```
 
-**Exercise 2:** Use `void` for functions that don't return values, `undefined` for functions that explicitly return undefined
+### Exercise 5 Answer:
+```typescript
+function getFirstItem<T>(items: T[]): T | undefined {
+  return items.length > 0 ? items[0] : undefined;
+}
+```
 
-**Exercise 3:** `number | string`, `User | null`
+### Exercise 6 Answer:
+```typescript
+async function fetchUserData(userId: number): Promise<{ id: number; name: string; email: string }> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        id: userId,
+        name: "John Doe",
+        email: "john@example.com"
+      });
+    }, 1000);
+  });
+}
+```
 
-**Exercise 4:** `T | undefined`, `Result<T>`
+### Exercise 7 Answer:
+```typescript
+function processData<T extends string | number>(
+  data: T
+): T extends string ? number : string {
+  return (typeof data === 'string' ? data.length : data.toString()) as T extends string ? number : string;
+}
+```
 
-**Exercise 5:** `string | number`, `number[]`, `{ name: string; age: number; isActive: boolean; }`
+### Exercise 8 Answer:
+```typescript
+function parseValue(input: string): { success: true; value: number } | { success: false; error: string } {
+  const parsed = Number(input);
+  if (isNaN(parsed)) {
+    return { success: false, error: "Invalid number" };
+  }
+  return { success: true, value: parsed };
+}
+```
 
-**Exercise 6:** Conditional types based on generic constraints
+### Exercise 9 Answer:
+```typescript
+function transformObject<T, U>(
+  obj: T,
+  transformer: (value: T[keyof T]) => U
+): { [K in keyof T]: U } {
+  const result = {} as { [K in keyof T]: U };
+  for (const key in obj) {
+    result[key] = transformer(obj[key]);
+  }
+  return result;
+}
+```
 
-**Exercise 7:** `Promise<{id: number; name: string; email: string}>`, `Promise<{success: boolean; message?: string; error?: string}>`
+### Exercise 10 Answer:
+```typescript
+function getValue(key: "name"): string;
+function getValue(key: "age"): number;
+function getValue(key: "isActive"): boolean;
+function getValue(key: string): string | number | boolean {
+  switch (key) {
+    case "name": return "John Doe";
+    case "age": return 25;
+    case "isActive": return true;
+    default: return "unknown";
+  }
+}
 
-**Exercise 8:** `Pick<User, K>`, `Partial<T>`
+type NameReturnType = ReturnType<typeof getValue>;
+// Alternative: type NameReturnType = string; (if targeting specific overload)
+```
 
-**Exercise 9:** `number[]`, recursive mapped type that converts numbers to strings
-
-**Exercise 10:** Method chaining with `this`, conditional types with mapped unions
+</details>
