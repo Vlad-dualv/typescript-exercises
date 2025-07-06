@@ -1,55 +1,136 @@
-// TypeScript Basic Type Declaration Exercises
+// TypeScript Basic Type Declaration Exercises - Set 2
 // Complete each exercise by adding the correct type annotations
 
-// Exercise 1: Declare a variable for a person's name
+// Exercise 11: Declare a variable that can be null or a string
 // TODO: Add type annotation
-const personName: string = "Alice";
+let optionalMessag: null | string = null;
 
-// Exercise 2: Declare a variable for someone's age
+// Exercise 12: Declare a variable that can be undefined or a number
 // TODO: Add type annotation
-const age: number = 25;
+let optionalCount: undefined | number = undefined;
 
-// Exercise 3: Declare a variable that indicates if a task is completed
+// Exercise 13: Declare a tuple for storing coordinates (x, y)
 // TODO: Add type annotation
-const isCompleted: boolean = true;
+let coordinates: [number, number] = [10, 20];
 
-// Exercise 4: Declare a variable that can hold either a string or number
+// Exercise 14: Declare a tuple for storing a person's name and age
 // TODO: Add type annotation
-const identifier: string | number = "ABC123";
+let personInfo: [string, number] = ["Alice", 30];
 
-// Exercise 5: Declare an array of numbers for test scores
-// TODO: Add type annotation
-const testScores: number[] = [85, 92, 78, 96];
+// Exercise 15: Declare an enum for days of the week
+// TODO: Create enum type
+enum DaysOfWeek {
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY,
+  SUNDAY,
+}
+// Add enum values
 
-// Exercise 6: Declare an array of strings for city names
-// TODO: Add type annotation
-const cities: string[] = ["New York", "London", "Tokyo"];
+// Exercise 16: Declare a variable using the enum from exercise 15
+// TODO: Add type annotation using the enum
+let today: DaysOfWeek = DaysOfWeek.MONDAY;
 
-// Exercise 7: Declare an object type for a book with title and author
+// Exercise 17: Declare an object type for a car with make, model, and year
 // TODO: Add type annotation
-const book: { title: string; author: string } = {
-  title: "1984",
-  author: "George Orwell",
+let car: { make: string; model: string; year: number } = {
+  make: "Toyota",
+  model: "Camry",
+  year: 2020,
 };
 
-// Exercise 8: Declare an object type for a user with name, email, and optional age
-// TODO: Add type annotation (age should be optional)
-const user: { name: string; email: string; age?: number } = {
-  name: "John Doe",
-  email: "john@example.com",
+// Exercise 18: Declare an object type for a product with name, price, and optional discount
+// TODO: Add type annotation (discount should be optional)
+let product: { name: string; price: number; discount?: number } = {
+  name: "Laptop",
+  price: 999.99,
 };
 
-// Exercise 9: Declare a function that takes two numbers and returns their sum
-// TODO: Add type annotations for parameters and return type
-function addNumbers(a: number, b: number): number {
-  return a + b;
+// Exercise 19: Declare a function that takes a boolean and returns a string
+// TODO: Add type annotations
+function boolToString(value: boolean): string {
+  return value ? "true" : "false";
 }
 
-// Exercise 10: Declare a function that takes a string and returns nothing (void)
-// TODO: Add type annotations for parameter and return type
-function logMessage(message: string): void {
-  console.log(message);
+// Exercise 20: Declare a function that takes no parameters and returns a number
+// TODO: Add type annotations
+function getRandomNumber(): number {
+  return Math.random();
 }
 
-// BONUS: Try to compile this file with TypeScript compiler (tsc)
-// to see if your type annotations are correct!
+// Exercise 21: Declare a function parameter that can be either string or number
+// TODO: Add type annotation for parameter
+function processValue(value: string | number): void {
+  console.log(`Processing: ${value}`);
+}
+
+// Exercise 22: Declare an array that can contain both strings and numbers
+// TODO: Add type annotation
+let mixedArray: (string | number)[] = ["hello", 42, "world", 123];
+
+// Exercise 23: Declare an object with nested object properties
+// TODO: Add type annotation for address object
+let person: {
+  name: string;
+  address: { street: string; city: string; zipCode: string };
+} = {
+  name: "John",
+  address: {
+    street: "123 Main St",
+    city: "New York",
+    zipCode: "10001",
+  },
+};
+
+// Exercise 24: Declare a function that takes an array of strings and returns a number
+// TODO: Add type annotations
+function countWords(words: string[]): number {
+  return words.length;
+}
+
+// Exercise 25: Declare a variable that can be one of three specific string values
+// TODO: Add type annotation (use literal types)
+let status: "pending" | "success" | "failure" = "pending";
+
+// Exercise 26: Declare a function with optional parameters
+// TODO: Add type annotations (lastName should be optional)
+function greetUser(firstName?: string, lastName?: string) {
+  return lastName ? `Hello, ${firstName} ${lastName}!` : `Hello, ${firstName}!`;
+}
+
+// Exercise 27: Declare an array of objects representing students
+// TODO: Add type annotation
+let students: { name: string; grade: number }[] = [
+  { name: "Alice", grade: 95 },
+  { name: "Bob", grade: 87 },
+];
+
+// Exercise 28: Declare a function that returns either a string or null
+// TODO: Add type annotations
+function findUser(id): string | null {
+  return id > 0 ? "User found" : null;
+}
+
+// Exercise 29: Declare an object with methods
+// TODO: Add type annotation for calculator object
+let calculator: {
+  add: (a: number, b: number) => number;
+  subtract: (a: number, b: number) => number;
+} = {
+  add: function (a, b) {
+    return a + b;
+  },
+  subtract: function (a, b) {
+    return a - b;
+  },
+};
+
+// Exercise 30: Declare a variable that can be any type (use any)
+// TODO: Add type annotation
+let dynamicValue: any = "This could be anything";
+
+// BONUS: Try using 'unknown' instead of 'any' for exercise 30
+// and see how TypeScript handles it differently!
