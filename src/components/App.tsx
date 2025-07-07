@@ -1,47 +1,16 @@
-interface Person {
-  name: string;
-  age: number;
-  email?: string;
+function identity<T>(params: T): T {
+  return params;
 }
 
-function greetPerson(person: Person): string {
-  return `Hello, ${person.name}!`;
+/*----------------------------*/
+
+function getFirstElement<T>(params: T[]): T | undefined {
+  return params.length > 0 ? params[0] : undefined;
 }
 
-/*---------------------*/
+/*----------------------------*/
 
-type Status = "pending" | "approved" | "rejected" | "cancelled";
-
-interface Application {
-  id: number;
-  applicantName: string;
-  status: Status;
-  sumbittedAt: Date;
-}
-
-/*---------------------*/
-
-interface Calculator {
-  add(a: number, b: number): number;
-  subtract(a: number, b: number): number;
-  multiply(a: number, b: number): number;
-  divide(a: number, b: number): number;
-}
-
-class BasicCalculator implements Calculator {
-  add(a: number, b: number): number {
-    return a + b;
-  }
-
-  subtract(a: number, b: number): number {
-    return a - b;
-  }
-
-  multiply(a: number, b: number): number {
-    return a * b;
-  }
-
-  divide(a: number, b: number): number {
-    return a / b;
-  }
+interface Container<T> {
+  getValue(): T;
+  setValue(value: T): void;
 }
