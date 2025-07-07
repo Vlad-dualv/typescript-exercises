@@ -1,37 +1,25 @@
-function identity<T>(params: T): T {
-  return params;
-}
+class Pair<T, U> {
+  constructor(private first: T, private second: U) {}
 
-/*----------------------------*/
-
-function getFirstElement<T>(params: T[]): T | undefined {
-  return params.length > 0 ? params[0] : undefined;
-}
-
-/*----------------------------*/
-
-interface Container<T> {
-  getValue(): T;
-  setValue(value: T): void;
-}
-
-/*----------------------------*/
-
-class Queue<T extends { id: any }> {
-  private items: T[] = [];
-  enqueue(item: T): void {
-    this.items.push(item);
-  }
-  dequeue(): T | undefined {
-    return this.items.shift();
-  }
-  peek(): T | undefined {
-    return this.items.length > 0 ? this.items[0] : undefined;
+  getFirst(): T {
+    return this.first;
   }
 
-  get size(): number {
-    return this.items.length;
+  getSecond(): U {
+    return this.second;
+  }
+
+  setFirst(value: T): void {
+    this.first = value;
+  }
+
+  setSecond(value: U): void {
+    this.second = value;
   }
 }
 
 /*----------------------------*/
+
+function lastelement<T>(arr: T[]): T | undefined {
+  return arr.length > 0 ? arr[arr.length - 1] : undefined;
+}
