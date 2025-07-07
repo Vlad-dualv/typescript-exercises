@@ -1,66 +1,11 @@
-function concatenateStringAndNumber(str: string, num: number): string {
-  return String(str + num);
-}
-
-/*----------------------------*/
-
-function sumArray(numbers: number[]): number {
-  return numbers.reduce((sum, num) => sum + num, 0);
-}
-
-/*----------------------------*/
-
-type Person = {
+interface User {
   name: string;
-  age: string;
-};
-function greet(person: Person): string {
-  return `Hello, ${person.name}`;
-}
-
-/*----------------------------*/
-
-function getLength(input: string | number): number {
-  if (typeof input === "string") {
-    return input.length;
-  } else {
-    return input;
-  }
-}
-
-/*----------------------------*/
-
-interface Book {
-  title: string;
-  author: string;
-  pages: number;
-  isbn?: boolean;
-}
-
-function getBookInfo(book: Book): string {
-  const isbnInfo = book.isbn ? ` (ISBN: ${book.isbn})` : "";
-  return `${book.title} by ${book.author}, ${book.pages} pages${isbnInfo}`;
-}
-
-/*----------------------------*/
-
-interface UserProfile {
-  username: string;
+  age: number;
   email: string;
-  age?: number;
-  bio?: string;
 }
 
-function createProfile(
-  username: string,
-  email: string,
-  age?: number,
-  bio?: string
-): UserProfile {
-  const profile: UserProfile = { username, email };
-  if (age !== undefined) profile.age = age;
-  if (bio !== undefined) profile.bio = bio;
-  return profile;
+function greet(user: User): string {
+  return `Hello, ${user.name}`;
 }
 
 /*----------------------------*/
@@ -71,49 +16,118 @@ function getFirstElement<T>(arr: T[]): T | undefined {
 
 /*----------------------------*/
 
-class Calculator {
-  private currentValue: number;
-
-  constructor(initialValue: number = 0) {
-    this.currentValue = initialValue;
-  }
-
-  add(value: number): Calculator {
-    this.currentValue += value;
-    return this;
-  }
-
-  subtract(value: number): Calculator {
-    this.currentValue -= value;
-    return this;
-  }
-
-  getValue(): number {
-    return this.currentValue;
-  }
-}
-
-/*----------------------------*/
-
-enum LogLevel {
-  DEBUG = "DEBUG",
-  INFO = "INFO",
-  WARN = "WARN",
-  ERROR = "ERROR",
-}
-
-function log(level: LogLevel, message: string): void {
-  console.log(`[${level}] ${message}`);
-}
-
-/*----------------------------*/
-
-function processValue(value: unknown): string {
+function processValue(value: string | number): number {
   if (typeof value === "string") {
-    return value.toUpperCase();
+    return value.length;
   } else if (typeof value === "number") {
-    return value.toString();
+    return value * value;
   } else {
-    return "invalid type";
+    return 0;
   }
+}
+
+/*----------------------------*/
+
+enum VehicleType {
+  Car = "car",
+  Truck = "truck",
+  Motorcycle = "motorcycle",
+  Bicycle = "bicycle",
+}
+
+function getWheelCount(vehicle: VehicleType): number {
+  switch (vehicle) {
+    case "car":
+      return 4;
+      break;
+    case "truck":
+      return 4;
+      break;
+    case "motorcycle":
+      return 2;
+      break;
+    case "bicycle":
+      return 2;
+      break;
+    default:
+      return 0;
+  }
+}
+
+/*----------------------------*/
+
+interface Product {
+  name: string;
+  price: number;
+  description?: string;
+  inStock?: boolean;
+}
+
+function createProduct(
+  name: string,
+  price: number,
+  description?: string,
+  inStock: boolean = true
+): Product {
+  return { name: "", price: 0, description, inStock };
+}
+
+/*----------------------------*/
+
+interface NumberStats {
+  sum: number;
+  average: number;
+  positiveCount: number;
+}
+
+function analyzeNumbers(numbers: number[]): NumberStats {
+  const sum = numbers.reduce((sum, num) => sum + num, 0);
+  const average = sum / numbers.length;
+  const positiveCount = numbers.filter((number) => number > 0);
+  return { sum, average, positiveCount };
+}
+
+/*----------------------------*/
+
+class BankAccount {
+  private balance: number;
+  constructor(initialBalance: number = 0) {
+    this.balance = initialBalance;
+  }
+  deposit(amount: number): void {
+    if (amount > 0) {
+      this.balance = this.balance + amount;
+    }
+  }
+
+  withdraw(amount: number): boolean {
+    if (amount <= this.balance) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getBalance(): number {
+    return this.balance;
+  }
+}
+
+/*----------------------------*/
+
+interface Flyable {
+  fly(): boolean;
+}
+
+interface Swimmable {
+  swim(): boolean;
+}
+
+interface Duck extends Flyable, Swimmable {
+  name: string;
+  quack(): boolean;
+}
+
+function makeDuckActions(duck: Duck): string[] {
+  return [duck.fly()];
 }
