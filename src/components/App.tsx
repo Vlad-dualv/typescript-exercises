@@ -29,24 +29,24 @@ function processValue(value: string | number): number {
 /*----------------------------*/
 
 enum VehicleType {
-  Car = "car",
-  Truck = "truck",
-  Motorcycle = "motorcycle",
-  Bicycle = "bicycle",
+  Car,
+  Truck,
+  Motorcycle,
+  Bicycle,
 }
 
 function getWheelCount(vehicle: VehicleType): number {
   switch (vehicle) {
-    case "car":
+    case VehicleType.Car:
       return 4;
       break;
-    case "truck":
-      return 4;
+    case VehicleType.Truck:
+      return 6;
       break;
-    case "motorcycle":
+    case VehicleType.Motorcycle:
       return 2;
       break;
-    case "bicycle":
+    case VehicleType.Bicycle:
       return 2;
       break;
     default:
@@ -69,7 +69,7 @@ function createProduct(
   description?: string,
   inStock: boolean = true
 ): Product {
-  return { name: "", price: 0, description, inStock };
+  return { name, price, description, inStock };
 }
 
 /*----------------------------*/
@@ -83,7 +83,7 @@ interface NumberStats {
 function analyzeNumbers(numbers: number[]): NumberStats {
   const sum = numbers.reduce((sum, num) => sum + num, 0);
   const average = sum / numbers.length;
-  const positiveCount = numbers.filter((number) => number > 0);
+  const positiveCount = numbers.filter((number) => number > 0).length;
   return { sum, average, positiveCount };
 }
 
@@ -96,12 +96,12 @@ class BankAccount {
   }
   deposit(amount: number): void {
     if (amount > 0) {
-      this.balance = this.balance + amount;
+      this.balance += amount;
     }
   }
 
   withdraw(amount: number): boolean {
-    if (amount <= this.balance) {
+    if (amount > 0 && amount <= this.balance) {
       return true;
     } else {
       return false;
@@ -116,18 +116,18 @@ class BankAccount {
 /*----------------------------*/
 
 interface Flyable {
-  fly(): boolean;
+  fly(): void;
 }
 
 interface Swimmable {
-  swim(): boolean;
+  swim(): void;
 }
 
 interface Duck extends Flyable, Swimmable {
   name: string;
-  quack(): boolean;
+  quack(): void;
 }
 
 function makeDuckActions(duck: Duck): string[] {
-  return [duck.fly()];
+  return ["fly", "swim", "quack"];
 }
