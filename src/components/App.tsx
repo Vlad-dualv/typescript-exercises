@@ -1,30 +1,29 @@
-interface CreditCard {
-  type: "creditCard";
-  number: string;
-}
 
-interface Paypal {
-  type: "paypal";
-  email: string;
-}
+type Operation = "add" | "subtract" | "multiply" | "divide"
 
-type PaymentMethod = CreditCard | Paypal;
-
-function processPayment(method: PaymentMethod): string {
-  if (method.type === "creditCard") {
-    return "Payment by credit card"
+function calculator(n1: number, n2: number, operation: Operation): number | string {
+  switch (operation) {
+    case "add":
+      return n1 + n2
+    case "subtract":
+      return n1 - n2;
+    case "multiply":
+      return n1 * n2
+    case "divide":
+      if (n2 === 0) {
+        return "Cannot divide by zero"
+      }
+      return n1 / n2
+    default:
+      return "Unknown operation"
   }
-  if (method.type === "paypal") {
-    return "Payment method by paypal"
-  }
-  return "Unknown payment method"
-}
+} 
 
-console.log(processPayment({type: "creditCard", number: "4532-1234-5678-9012"})); // Credit card
-console.log(processPayment({type: "paypal", email: "4532-1234-5678-9012"})); // Credit card
-
+console.log(calculator(2, 2, "add"))
+console.log(calculator(2, 2, "subtract"))
+console.log(calculator(2, 2, "multiply"))
+console.log(calculator(2, 2, "divide"))
 
 export default function App() {
-  return <div>Check the console for output</div>;
+  return <div>Check the console</div>
 }
-
