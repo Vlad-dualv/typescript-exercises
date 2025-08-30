@@ -1,46 +1,27 @@
-enum Status {
-  PENDING,
-  PROCESSING,
-  SHIPPED,
-  DELIVERED
+function getLastItem<T>(array: T[]): T | undefined {
+  return array.at(-1)
 }
 
-type paymentMethod = "credit" | "debit" | "paypal";
+const arr1 = [1, 2, 3, 4]
+const arr2 = ["one", "two", "three", "four"]
+const arr3 = [
+  {
+    name: "Vlad",
+    age: 30,
+  },
+  {
+    name: "Sara",
+    age: 30,
+  },
+  {
+    name: "Murka",
+    age: 16,
+  },
+]
 
-interface Order {
-  id: number;
-  customerName: string;
-  total: number;
-  status: Status;
-  paymentMethod: paymentMethod;
-}
-
-function processOrder(order: Order, status: Status): string {
-  order.status = status;
-  return `Order #${order.id} for ${order.customerName} has been updated to ${order.status}`
-}
-
-function calculateFee(paymentMethod: paymentMethod, total: number): number {
-  if (paymentMethod === "credit") {
-    return total * 1.029
-  } else if (paymentMethod === "debit") {
-    return total * 1.015
-  } else if (paymentMethod === "paypal") {
-    return total * 1.035
-  }
-  return 0
-}
-
-const order: Order = {
-  id: 101,
-  customerName: "Alice Smith",
-  total: 100,
-  status: Status.PENDING,
-  paymentMethod: "paypal"
-};
-
-console.log(processOrder(order, Status.PROCESSING));
-console.log(`Order total with fee: $${calculateFee(order.paymentMethod, order.total).toFixed(2)}`);
+console.log(getLastItem(arr1))
+console.log(getLastItem(arr2))
+console.log(getLastItem(arr3))
 
 export default function App() {
   return <div>Check the console</div>
