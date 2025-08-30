@@ -1,27 +1,32 @@
-function getLastItem<T>(array: T[]): T | undefined {
-  return array.at(-1)
-}
+class BankAccount {
+  constructor(private balance: number, public accountNumber: number, protected customerName: string) {}
+  deposit(value: number): number | string {
+    if (value > 0) {
+      this.balance += value
+      return this.balance
+    }
+    return "Deposit must be more than 0"
+  }
+  withdraw(value: number): number | string {
+    if (value <= 0) {
+      return "Withdraw must be more than 0";
+    }
+    if (value > this.balance) {
+      return "Insufficient balance";
+    }
+    this.balance -= value;
+    return this.balance;
+  }
+  getBalance(): number {
+    return this.balance
+  }
+ }
 
-const arr1 = [1, 2, 3, 4]
-const arr2 = ["one", "two", "three", "four"]
-const arr3 = [
-  {
-    name: "Vlad",
-    age: 30,
-  },
-  {
-    name: "Sara",
-    age: 30,
-  },
-  {
-    name: "Murka",
-    age: 16,
-  },
-]
-
-console.log(getLastItem(arr1))
-console.log(getLastItem(arr2))
-console.log(getLastItem(arr3))
+ const account = new BankAccount(1000, 12345, "John")
+ console.log(account.accountNumber); // 12345 (accessible - public)
+console.log(account.deposit(500)); // 1500
+console.log(account.withdraw(200)); // 1300
+console.log(account.getBalance()); // 1300
 
 export default function App() {
   return <div>Check the console</div>
