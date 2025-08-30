@@ -1,21 +1,46 @@
-interface User {
-  name: string;
-  email: string;
-  age?: number;
-  role?: string;
+enum Status {
+  PENDING,
+  PROCESSING,
+  SHIPPED,
+  DELIVERED
 }
 
-function createUser(name: string, email: string, age?: number, role: string = "user"): User {
-  const user: User = {name, email, role}
-  if (age !== undefined) {
-    user.age = age;
-  }
-  return user
-  }
+type paymentMethod = "credit" | "debit" | "paypal";
 
-  console.log(createUser("John", "john@email.com"));                    // Uses default role
-console.log(createUser("Jane", "jane@email.com", 25));                // Uses default role, includes age
-console.log(createUser("Bob", "bob@email.com", 30, "admin")); 
+interface Order {
+  id: number;
+  customerName: string;
+  total: number;
+  status: Status;
+  paymentMethod: paymentMethod;
+}
+
+function processOrder(order: Order, status: Status): string {
+  order.status = status;
+  return `Order #${order.id} for ${order.customerName} has been updated to ${order.status}`
+}
+
+function calculateFee(paymentMethod: paymentMethod, total: number): number {
+  if (paymentMethod === "credit") {
+    return total * 1.029
+  } else if (paymentMethod === "debit") {
+    return total * 1.015
+  } else if (paymentMethod === "paypal") {
+    return total * 1.035
+  }
+  return 0
+}
+
+const order: Order = {
+  id: 101,
+  customerName: "Alice Smith",
+  total: 100,
+  status: Status.PENDING,
+  paymentMethod: "paypal"
+};
+
+console.log(processOrder(order, Status.PROCESSING));
+console.log(`Order total with fee: $${calculateFee(order.paymentMethod, order.total).toFixed(2)}`);
 
 export default function App() {
   return <div>Check the console</div>
