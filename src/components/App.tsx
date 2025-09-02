@@ -1,14 +1,21 @@
-interface Rectangle {
-  width: number;
-  height: number;
+interface User {
+  id: string;
+  name: string;
+  age: number;
+  phoneNumber?: number;
 }
 
-function calculateArea(rectangle: Rectangle): number {
-  return rectangle.width * rectangle.height
+function greeting(user: User): string {
+  return ` Hello, ${user.name}! Your id is ${user.id} and your age is ${user.age}`
 }
 
-const myRectangle: Rectangle = {width: 5, height: 10}
-console.log(calculateArea(myRectangle))
+const user1: User = {
+  id: crypto.randomUUID(),
+  name: "Vlad",
+  age: 30,
+}
+
+console.log(greeting(user1))
 
 export default function App() {
   return <div>Check the console for results</div>
