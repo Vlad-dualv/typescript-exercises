@@ -1,6 +1,6 @@
-import Counter from "./Counter"
+import TodoList from "./TodoList"
 
 export default function App() {
-  return <Counter />
+  return <TodoList />
 }
 
