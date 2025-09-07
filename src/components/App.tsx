@@ -1,6 +1,6 @@
-import TodoList from "./TodoList"
+import ContactForm from "./ContactForm"
 
 export default function App() {
-  return <TodoList />
+  return <ContactForm />
 }
 
